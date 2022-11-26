@@ -3,6 +3,8 @@
 这是我计算机视觉做的一个设计，基于大佬的基础上（可以在主页查看）
 
 接下来开始介绍（可以下载word版）
+
+
 本项目是提取 128D 人脸特征，然后计算 摄像头人脸特征 和 预设的特征脸的欧式距离，进行比对
 基于常用摄像头，通过调用摄像头对人脸进行拍照，存入制定文件夹,再通过代码将图片进行统一识别处理，将之前捕获到的人脸图像文件，提取出 128D 特征，然后计算出某人人脸数据的特征均值存入 CSV 中，方便之后识别时候进行比对；
 利用 numpy.mean() 计算特征均值，生成一个存储所有录入人脸数据的数据库，在后期识别框架中，通过摄像机抓取与数据库中比较，如果欧式距离比较近的话，就可以认为是同一张人脸。并在交互界面上显示名称，并且支持多张人脸同时识别
@@ -31,14 +33,17 @@ Dlib是一个使用现代C++技术编写的跨平台的通用库，遵守Boost S
 ![image](https://user-images.githubusercontent.com/80191756/204095475-3ba278fb-7e0a-4570-95a9-cf9b4310df78.png)
 
 欧几里得度量（euclidean metric）（也称欧氏距离）是一个通常采用的距离定义，指在m维空间中两个点之间的真实距离，或者向量的自然长度（即该点到原点的距离）。在二维和三维空间中的欧氏距离就是两点之间的实际距离。
+![image](https://user-images.githubusercontent.com/80191756/204095761-9c03c940-2e78-4da4-82f2-f711c9d71ce4.png)
 
 3.需求分析
 1.人脸录入界面, 支持录入时设置 (中文) 姓名
-   
+   ![image](https://user-images.githubusercontent.com/80191756/204095774-2cbadb60-2497-4aac-846f-dc7b5537729c.png)
+
 
 2.简单的 OpenCV 摄像头人脸录入界面。可以显示人脸数量，刷新帧率
 对图像进行保存，和界面退出。          
 
+![image](https://user-images.githubusercontent.com/80191756/204095781-899b1597-53c4-46b9-a686-e3e1676dba5f.png)
 
 
 
@@ -46,14 +51,20 @@ Dlib是一个使用现代C++技术编写的跨平台的通用库，遵守Boost S
 
 3.离摄像头过近或人脸超出摄像头范围时, 会有 "OUT OF RANGE" 提醒
 
+![image](https://user-images.githubusercontent.com/80191756/204095791-7c7600b3-39a7-47d0-bbae-6fc0ae2d8f27.png)
 
+![image](https://user-images.githubusercontent.com/80191756/204095795-614f0e7d-8aba-47e0-afac-d297f934ffa3.png)
+![image](https://user-images.githubusercontent.com/80191756/204095800-f5c925a1-a99c-43f8-ae86-1babaf0c5449.png)
 
 4.提取特征建立人脸数据库利用摄像头进行人脸识别 对于每一帧都做检测识别 
+![image](https://user-images.githubusercontent.com/80191756/204095809-d6f1347d-c828-4bda-9f50-741d3f598f4f.png)
 
 4.Gui界面定制显示名字
+![image](https://user-images.githubusercontent.com/80191756/204095827-864c5d07-2c17-486e-b9d9-5a7cb6cd63b1.png)
 
 4.总体设计
 以组织结构图或者流程图的形式给出课程设计作品的功能模块划分，并对各模块做简要解释说明。
+![image](https://user-images.githubusercontent.com/80191756/204095820-b6ec391d-6435-40b6-bba8-cbd15ac895bd.png)
 
 5.详细设计
 5.1.功能模块1：打开相机并录入人脸
@@ -86,6 +97,7 @@ Dlib是一个使用现代C++技术编写的跨平台的通用库，遵守Boost S
                   text='Save current face',
                   command=self.save_current_face).grid(row=10, column=0, columnspan=3, sticky=tk.W)
 
+![image](https://user-images.githubusercontent.com/80191756/204095842-1606fa23-3685-4089-82f3-3290484e0fa3.png)
 
 5.2.功能模块2：对录入人脸进行保存
  def pre_work_mkdir(self):
@@ -120,10 +132,12 @@ if len(faces) != 0:
   3. 将当前帧人脸特征描述子和数据库的特征描述子进行对比
         for i in range(len(self.features_known_list)):
             e_distance_tmp = self.return_euclidean_distance(self.features_camera_list[k], self.features_known_list[i])
+![image](https://user-images.githubusercontent.com/80191756/204095867-c43358af-0f58-4139-a29d-1600a474c48c.png)
 
 6.设计结果及分析
 1.可以先清理原数据库所有数据，如下图
 
+![image](https://user-images.githubusercontent.com/80191756/204095872-9415c2e4-fdaf-4217-8613-a11977dd8b56.png)
 
 
 2.输入被识别人的名称，创建文件夹，如图
@@ -131,15 +145,18 @@ if len(faces) != 0:
 
 
 
+![image](https://user-images.githubusercontent.com/80191756/204095880-3fa7f7a7-489e-4fff-9f4c-51ed4efbbe0a.png)
 
 
 
 
 3对面部进行拍照，并保存到文件夹，如图
 
+![image](https://user-images.githubusercontent.com/80191756/204095882-81c1d3ff-296a-474b-9970-9cf9e7063ce3.png)
 
 
 
+![image](https://user-images.githubusercontent.com/80191756/204095899-e9c52037-d3b6-4b2e-822c-b3eb3714daaa.png)
 
 
 
@@ -147,12 +164,16 @@ if len(faces) != 0:
 
 4.对保存图像进行处理获得128D数据，记录在csv文件中
 
+![image](https://user-images.githubusercontent.com/80191756/204095911-b9a16f1a-1563-449a-9fb1-0bd3ba005997.png)
 
 
+![image](https://user-images.githubusercontent.com/80191756/204095933-c176b451-26c1-4bc9-9a64-178860141590.png)
 
 
 
 5.得到结果，识别出我是cmz
 
+![image](https://user-images.githubusercontent.com/80191756/204095922-1e44a68b-182b-4417-8af9-0c209eb43067.png)
 
 2）并且可以同时识别多张脸
+![image](https://user-images.githubusercontent.com/80191756/204095926-56e3f756-3af7-4f63-b36a-ca2be0a8d579.png)
